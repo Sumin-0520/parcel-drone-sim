@@ -51,5 +51,5 @@ for axp, (title, d, keys, labels) in zip(axs[1:], out):
     for k, l in zip(keys, labels): axp.plot(t, d[k], label=k)
     axp.set_ylabel(title.replace('모터 출력', 'motor').replace('토크 명령', 'torque sp')); axp.legend(fontsize=7); axp.axvspan(a, b, alpha=0.15)
 axs[-1].set_xlabel('time [s]')
-png = os.path.expanduser(f'~/parcel-drone-sim/results/{tag}.png'); plt.tight_layout(); plt.savefig(png, dpi=120)
+png = os.path.expanduser(f'~/parcel-drone-sim/results/{tag}.png'); os.makedirs(os.path.dirname(png), exist_ok=True); plt.tight_layout(); plt.savefig(png, dpi=120)
 print('그래프 저장:', png)
