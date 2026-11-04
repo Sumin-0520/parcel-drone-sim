@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.9">
+  <!-- tools/make_auditorium_world.py 가 생성. 직접 수정 금지 -->
+  <!-- 강당 바닥 30 x 20 m, 나무 마루 그림. 모델 원점 = 강당 중앙 -->
+  <model name="auditorium_floor">
+    <static>true</static>
+    <link name="link">
+      <!-- 충돌면: 넉넉하게 200 x 200 m -->
+      <collision name="collision">
+        <geometry><plane><normal>0 0 1</normal><size>200 200</size></plane></geometry>
+        <surface><friction><ode><mu>0.8</mu><mu2>0.8</mu2></ode></friction></surface>
+      </collision>
+      <!-- 강당 바닥 그림 -->
+      <visual name="wood">
+        <geometry><plane><normal>0 0 1</normal><size>30.0 20.0</size></plane></geometry>
+        <material>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>0.1 0.1 0.1 1</specular>
+          <pbr><metal>
+            <albedo_map>model://auditorium_floor/materials/textures/floor_wood.jpg</albedo_map>
+            <roughness>0.6</roughness>
+            <metalness>0.0</metalness>
+          </metal></pbr>
+        </material>
+      </visual>
+      <!-- 강당 밖 바닥 (회색, 살짝 아래) -->
+      <visual name="outside">
+        <pose>0 0 -0.005 0 0 0</pose>
+        <geometry><plane><normal>0 0 1</normal><size>200 200</size></plane></geometry>
+        <material><ambient>0.45 0.45 0.44 1</ambient><diffuse>0.45 0.45 0.44 1</diffuse></material>
+      </visual>
+    </link>
+  </model>
+</sdf>

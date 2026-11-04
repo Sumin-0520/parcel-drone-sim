@@ -246,6 +246,8 @@
         </magnetometer>
       </sensor>
       <sensor name="imu_sensor" type="imu">
+        <!-- [위치] IMU = FC(Pixhawk 6C) 중심: 정중앙, 하판 아랫면 위 36 mm (하판 두께 2 mm, FC 윗면이 하판 윗면 위 40 mm, IMU는 FC 높이 가운데로 가정) -->
+        <pose>0 0 0.036 0 0 0</pose>
         <gz_frame_id>base_link</gz_frame_id>
         <always_on>1</always_on>
         <update_rate>250</update_rate>

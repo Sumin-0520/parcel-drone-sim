@@ -1,0 +1,35 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "SIM",
+      "type": "process",
+      "command": "bash",
+      "args": ["-c", "cd ~/PX4-Autopilot && exec bash -l"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "always", "focus": true },
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "QGC",
+      "type": "process",
+      "command": "bash",
+      "args": ["-c", "cd ~ && exec bash -l"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "always", "focus": false },
+      "runOptions": { "runOn": "folderOpen" }
+    },
+    {
+      "label": "CMD",
+      "type": "process",
+      "command": "bash",
+      "args": ["-c", "cd ~/parcel-drone-sim && exec bash -l"],
+      "isBackground": true,
+      "problemMatcher": [],
+      "presentation": { "panel": "dedicated", "reveal": "always", "focus": false },
+      "runOptions": { "runOn": "folderOpen" }
+    }
+  ]
+}

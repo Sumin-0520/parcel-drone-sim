@@ -72,5 +72,59 @@
       <rotorVelocitySlowdownSim>10</rotorVelocitySlowdownSim>
       <motorType>velocity</motorType>
     </plugin>
+
+    <!-- 센서 시작 -->
+    <!-- ================================================================
+         센서: 광류 카메라(PMW3901 역할) + 거리계(VL53L1X 역할)
+         위치: 두 센서 같은 자리. 하판 아랫면 기준 앞 8 cm, 아래 2 cm, 바닥을 바라봄 (10/31 사용자)
+         좌표: pose = x 앞, y 왼쪽, z 위 (m)
+               기준 base_link = 모터 4개 중심, 하판 아랫면 (무게중심 계산과 같은 원점)
+         나중에 위치가 바뀌면 [위치] 표시된 pose 의 앞 세 숫자 (x y z) 만 고친다.
+
+         실제 센서와 같은 점 / 다른 점
+           광류: 시야 42 도 (PMW3901 과 같음). 해상도 100 x 100 px, 50 Hz 는 PX4 기본값
+                 (PMW3901 은 35 x 35 px). 계산 방식은 Gazebo 카메라 영상 기반이라 실제 칩과 다름
+           거리계: 측정 범위 0.04 ~ 4 m, 30 Hz 로 VL53L1X 에 맞춤 (가정, 데이터시트 확인 필요)
+                 광선 1개로 측정 (실제 VL53L1X 시야 약 27 도)
+         ================================================================ -->
+
+    <!-- [위치] 광류 카메라: 앞 8 cm, 하판 아래 2 cm -->
+    <include merge='true'>
+      <uri>model://optical_flow</uri>
+      <pose relative_to="base_link">0.08 0 -0.02 0 0 0</pose>
+    </include>
+    <joint name="optical_flow_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>flow_link</child>
+    </joint>
+
+    <!-- [위치] 거리계: 앞 8 cm, 하판 아래 2 cm, 아래를 바라봄 -->
+    <joint name="lidar_sensor_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>lidar_sensor_link</child>
+    </joint>
+    <link name="lidar_sensor_link">
+      <pose relative_to="base_link">0.08 0 -0.02 0 1.5707 0</pose>
+      <inertial>
+        <mass>0.001</mass>
+        <inertia><ixx>0.00001</ixx><iyy>0.00001</iyy><izz>0.00001</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <sensor name="lidar" type="gpu_lidar">
+        <gz_frame_id>lidar_sensor_link</gz_frame_id>
+        <pose>0 0 0 3.14 0 0</pose>
+        <update_rate>30</update_rate>
+        <ray>
+          <scan>
+            <horizontal><samples>1</samples><resolution>1</resolution><min_angle>0</min_angle><max_angle>0</max_angle></horizontal>
+            <vertical><samples>1</samples><resolution>1</resolution><min_angle>0</min_angle><max_angle>0</max_angle></vertical>
+          </scan>
+          <!-- 측정 범위: VL53L1X 롱 모드 약 0.04 ~ 4 m (가정) -->
+          <range><min>0.04</min><max>4.0</max><resolution>0.001</resolution></range>
+        </ray>
+        <always_on>1</always_on>
+        <visualize>true</visualize>
+      </sensor>
+    </link>
+    <!-- 센서 끝 -->
   </model>
 </sdf>
