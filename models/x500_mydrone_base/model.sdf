@@ -5,7 +5,7 @@
     <self_collide>false</self_collide>
     <static>false</static>
     <link name="base_link">
-      <inertial><pose>-0.0177 0.0001 -0.0496 0 0 0</pose><mass>2.219</mass><inertia><ixx>0.02404</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.02404</iyy><iyz>0</iyz><izz>0.04438</izz></inertia></inertial>
+      <inertial><pose>-0.0140 0.0001 -0.0496 0 0 0</pose><mass>2.536</mass><inertia><ixx>0.02747</ixx><ixy>0</ixy><ixz>0</ixz><iyy>0.02747</iyy><iyz>0</iyz><izz>0.05072</izz></inertia></inertial>
       <gravity>true</gravity>
       <velocity_decay />
       <visual name="base_link_visual">

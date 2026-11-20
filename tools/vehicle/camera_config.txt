@@ -1,0 +1,10 @@
+x 0.12
+y 0.0
+z -0.03
+pitch 90.0
+yaw 0.0
+hfov 62.2
+width 640
+height 480
+rate 15
+fx 530.47
