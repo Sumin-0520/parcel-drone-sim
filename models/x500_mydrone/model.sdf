@@ -11,9 +11,9 @@
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <maxRotVelocity>954.8</maxRotVelocity>
+      <motorConstant>1.22990e-05</motorConstant>
+      <momentConstant>0.0140</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>0</motorNumber>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
@@ -28,9 +28,9 @@
       <turningDirection>ccw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <maxRotVelocity>954.8</maxRotVelocity>
+      <motorConstant>1.22990e-05</motorConstant>
+      <momentConstant>0.0140</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>1</motorNumber>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
@@ -45,9 +45,9 @@
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <maxRotVelocity>954.8</maxRotVelocity>
+      <motorConstant>1.22990e-05</motorConstant>
+      <momentConstant>0.0140</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>2</motorNumber>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
@@ -62,9 +62,9 @@
       <turningDirection>cw</turningDirection>
       <timeConstantUp>0.0125</timeConstantUp>
       <timeConstantDown>0.025</timeConstantDown>
-      <maxRotVelocity>1000.0</maxRotVelocity>
-      <motorConstant>8.54858e-06</motorConstant>
-      <momentConstant>0.016</momentConstant>
+      <maxRotVelocity>954.8</maxRotVelocity>
+      <motorConstant>1.22990e-05</motorConstant>
+      <momentConstant>0.0140</momentConstant>
       <commandSubTopic>command/motor_speed</commandSubTopic>
       <motorNumber>3</motorNumber>
       <rotorDragCoefficient>8.06428e-05</rotorDragCoefficient>
@@ -126,5 +126,37 @@
       </sensor>
     </link>
     <!-- 센서 끝 -->
+
+    <!-- down_camera start -->
+    <!-- [위치] 아래쪽 카메라 (IMX219 가정): 앞 0.12 m, 좌우 0.0 m, 위아래 -0.03 m, pitch 90.0° -->
+    <joint name="down_camera_joint" type="fixed">
+      <parent>base_link</parent>
+      <child>down_camera_link</child>
+    </joint>
+    <link name="down_camera_link">
+      <pose relative_to="base_link">0.12 0.0 -0.03 0 1.5708 0.0000</pose>
+      <inertial>
+        <mass>0.003</mass>
+        <inertia><ixx>1e-6</ixx><iyy>1e-6</iyy><izz>1e-6</izz><ixy>0</ixy><ixz>0</ixz><iyz>0</iyz></inertia>
+      </inertial>
+      <visual name="down_camera_visual">
+        <geometry><box><size>0.01 0.025 0.024</size></box></geometry>
+        <material><ambient>0.1 0.1 0.1 1</ambient><diffuse>0.1 0.1 0.1 1</diffuse></material>
+      </visual>
+      <sensor name="down_camera" type="camera">
+        <gz_frame_id>down_camera_link</gz_frame_id>
+        <topic>/down_camera/image</topic>
+        <update_rate>15</update_rate>
+        <always_on>1</always_on>
+        <visualize>false</visualize>
+        <camera>
+          <horizontal_fov>1.0856</horizontal_fov>
+          <image><width>640</width><height>480</height><format>R8G8B8</format></image>
+          <clip><near>0.03</near><far>30</far></clip>
+          <noise><type>gaussian</type><mean>0</mean><stddev>0.005</stddev></noise>
+        </camera>
+      </sensor>
+    </link>
+    <!-- down_camera end -->
   </model>
 </sdf>
