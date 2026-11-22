@@ -44,6 +44,15 @@ def main():
     n_est = est["x"] - est["x"][0]
     n_gt = gt["x"] - gt["x"][0]
     n0 = est["x"][0]
+    # 시간 순서로 정렬 + NaN 제거 (np.interp는 시간이 커지는 순서여야 함. 아니면 엉뚱한 값)
+    def clean(t, v):
+        ok = np.isfinite(v)
+        t, v = t[ok], v[ok]
+        o = np.argsort(t, kind="stable")
+        return t[o], v[o]
+    te, n_est = clean(te, n_est)
+    tg, n_gt = clean(tg, n_gt)
+    ts, n_sp = clean(ts, n_sp)
 
     # 옆 이동 구간: 목표가 북쪽으로 1 m 넘게 나가 있는 동안 (+ 끝나고 3초)
     far = ts[(n_sp - n0) > 1.0]
